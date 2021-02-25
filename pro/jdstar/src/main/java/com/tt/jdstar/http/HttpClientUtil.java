@@ -69,9 +69,9 @@ public class HttpClientUtil {
 			httpResponse = httpClient.execute(httpGet);
 			result = EntityUtils.toString(httpResponse.getEntity());
 			List<Cookie> cookies = cookieStore.getCookies();
-			for (int i = 0; i < cookies.size(); i++) {
-				System.out.println("Local cookie: " + cookies.get(i));
-			}
+//			for (int i = 0; i < cookies.size(); i++) {
+//				logger.info("Local cookie: " + cookies.get(i));
+//			}
 			} catch (ClientProtocolException e) {
 			logger.error("HttpClientUtil doGet exception", e);
 		} catch (IOException e) {
@@ -110,9 +110,9 @@ public class HttpClientUtil {
 			FileUtil.BytesToFile(bytes,"/Users/hayashika/program-kk/pro/","qrCode.png");
 
 			List<Cookie> cookies = cookieStore.getCookies();
-			for (int i = 0; i < cookies.size(); i++) {
-				logger.info("Local cookie: " + cookies.get(i));
-			}
+//			for (int i = 0; i < cookies.size(); i++) {
+//				logger.info("Local cookie: " + cookies.get(i));
+//			}
 		} catch (ClientProtocolException e) {
 			logger.error("HttpClientUtil doGet exception", e);
 			return false;

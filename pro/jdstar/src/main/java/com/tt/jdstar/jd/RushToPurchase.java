@@ -2,24 +2,15 @@ package com.tt.jdstar.jd;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tt.jdstar.http.HttpClientUtil;
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.Cookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class RushToPurchase implements Runnable{
     private static Logger logger = LoggerFactory.getLogger(RushToPurchase.class);
     //请求头
     volatile static Integer times = 0;
-    static Map<String, List<String>> stringListMap = new HashMap<String, List<String>>();
-
     public String loginCookie;
 
     public RushToPurchase(String loginCookie) {
@@ -43,9 +34,6 @@ public class RushToPurchase implements Runnable{
             }
             //订单信息
             String orderInfo = HttpClientUtil.doGet(headers, "https://trade.jd.com/shopping/order/getOrderInfo.action");
-//            CookieStore cartCookieStore = HttpClientUtil.cookieStore;
-//            List<Cookie> cartCookie = cartCookieStore.getCookies();
-//            headers.put("Cookie", cartCookie);
 
             //提交订单
             JSONObject subData = new JSONObject();

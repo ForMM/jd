@@ -48,7 +48,6 @@ public class HttpUrlConnectionUtil {
             }
             httpURLConnection.disconnect();
         }
-        System.out.println(response);
         return response;
     }
 

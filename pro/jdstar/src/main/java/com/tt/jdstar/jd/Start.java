@@ -25,13 +25,13 @@ public class Start {
     final static String Referer = "Referer";
     final static String RefererArg = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F";
     //商品id
-    static String pid = "100012043978";
+    static String pid = "100016199072";
     //eid
     static String eid = "S5HVDQLVHH54D5Y6O6G54UUMBKEXORGKO25DQ75GH3O67ZAROXL7DPH3M26TY3MOG5J5TQ6ODEIZVRPTYO7RPMSIOU";
     //fp
-    static String fp = "465d9960bf40fe27306b6e43e7577c4b";
+    static String fp = "7615cb244ccb06e239dcde151aa2f1f6";
     //抢购数量
-    volatile static Integer ok = 2;
+    volatile static Integer ok = 1;
 
     static CookieManager manager = new CookieManager();
 
@@ -41,6 +41,12 @@ public class Start {
         String loginCookie = Login.Login();
         //判断是否开始抢购
         judgePruchase(loginCookie);
+
+
+        //判断库存状态
+
+
+
         //开始抢购
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 1000, TimeUnit.MILLISECONDS, new PriorityBlockingQueue<Runnable>(), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
         for (int i = 0; i < 1; i++) {
@@ -55,7 +61,10 @@ public class Start {
         headers.put(Start.headerAgent, Start.headerAgentArg);
 //        headers.put(Start.Referer, Start.RefererArg);
         headers.put("Cookie", cookie);
-        JSONObject shopDetail = JSONObject.parseObject(HttpUrlConnectionUtil.get(headers, "https://item-soa.jd.com/getWareBusiness?skuId=" + pid));
+
+        String s = HttpUrlConnectionUtil.get(headers, "https://item-soa.jd.com/getWareBusiness?skuId=" + pid);
+        logger.info("shopDetail"+s);
+        JSONObject shopDetail = JSONObject.parseObject(s);
         if (shopDetail.get("yuyueInfo") != null) {
             String buyDate = JSONObject.parseObject(shopDetail.get("yuyueInfo").toString()).get("buyTime").toString();
             String startDate = buyDate.split("-202")[0] + ":00";

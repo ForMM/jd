@@ -88,11 +88,11 @@ public class Login {
         List<Cookie> loginCookieList = loginCookieStore.getCookies();
         if (!loginCookieList.isEmpty()){
             for (int i = 0; i < loginCookieList.size(); i++) {
-                logger.info(loginCookieList.get(i).getName());
+//                logger.info(loginCookieList.get(i).getName());
                 loginCookie += loginCookieList.get(i).getName() +"="+loginCookieList.get(i).getValue()+";";
             }
         }
-        logger.info("登录后的cookie：",loginCookie);
+//        logger.info("登录后的cookie：",loginCookie);
         return loginCookie;
     }
 
